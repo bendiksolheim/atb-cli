@@ -1,0 +1,22 @@
+{
+  "name": "atb-cli",
+  "version": "1.0.0",
+  "description": "A small CLI to ATBs bus routes in Trondheim",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bendiksolheim/atb-cli.git"
+  },
+  "author": "Bendik Solheim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bendiksolheim/atb-cli/issues"
+  },
+  "homepage": "https://github.com/bendiksolheim/atb-cli#readme",
+  "dependencies": {
+    "request": "^2.67.0"
+  }
+}
