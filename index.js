@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const api = require('./src/api');
 
 function isRoute(route) {
