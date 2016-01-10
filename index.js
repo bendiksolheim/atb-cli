@@ -6,6 +6,14 @@ function isRoute(route) {
     }
 }
 
+function formatRoutes(routes) {
+    return routes
+        .map((route) => {
+            return `${route.l}\t${route.ts}`;
+        })
+        .join('\n');
+}
+
 // http://stackoverflow.com/questions/18082/validate-decimal-numbers-in-javascript-isnumeric
 function isNumeric(n) {
     return !isNaN(parseFloat(n) && isFinite(n));
@@ -18,10 +26,7 @@ function isId(query) {
 function get(query) {
     if (isId(query)) {
         return api.byStopId(query).then(stop => {
-            return stop
-                .filter(isRoute("60"))
-                .map((route) => route.ts)
-                .join('\n');
+            return `${stop.name}\n${formatRoutes(stop.next)}`;
         });
     }
 

@@ -27,7 +27,7 @@ function get(url, transform) {
 
 function byStopId(id) {
     return get(`${base}/rt/${id}`, (response) => {
-        return response.next;
+        return response;
     });
 }
 
