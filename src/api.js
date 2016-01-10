@@ -1,5 +1,5 @@
 const request = require('request');
-const base = "http://bybussen.api.tmn.io/rt";
+const base = "http://bybussen.api.tmn.io";
 
 function req(url) {
     return {
@@ -8,17 +8,36 @@ function req(url) {
     };
 }
 
-function byStopId(id) {
+function containsName(name) {
+    return stop => {
+        return stop.name.toLowerCase().includes(name);
+    };
+}
+
+function get(url, transform) {
     return new Promise((resolve, reject) => {
-        request(req(`${base}/${id}`), (error, response, body) => {
+        request(req(url), (error, response, body) => {
             if (error)
                 return reject(error);
 
-            resolve(body.next);
+            resolve(transform(body));
         });
     });
 }
 
+function byStopId(id) {
+    return get(`${base}/rt/${id}`, (response) => {
+        return response.next;
+    });
+}
+
+function byStopName(name) {
+    return get(`${base}/stops`, (response) => {
+        return response.filter(containsName(name.toLowerCase()));
+    });
+}
+
 module.exports = {
-    byStopId: byStopId
+    byStopId,
+    byStopName
 };
