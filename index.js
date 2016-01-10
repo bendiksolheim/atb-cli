@@ -23,14 +23,14 @@ function get(query) {
                 .map((route) => route.ts)
                 .join('\n');
         });
-    } else {
-        return api.byStopName(query).then(stops => {
-            return stops
-                .map(stop => {
-                    return `${stop.name}\t\t${stop.locationId}`;
-                }).join('\n');
-        });
     }
+
+    return api.byStopName(query).then(stops => {
+        return stops
+            .map(stop => {
+                return `${stop.name}\t\t${stop.locationId}`;
+            }).join('\n');
+    });
 }
 
 if (process.argv.length > 2) {
