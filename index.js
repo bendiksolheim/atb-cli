@@ -3,15 +3,24 @@
 const columnify = require('columnify');
 const api = require('./api');
 
-function print(data) {
-    if (data.heading) {
-        console.log(data.heading);
-        data = data.data;
+const columnOptions = {
+    showHeaders: false,
+    columnSplitter: '  '
+}
+
+function print(results) {
+    if (!Array.isArray(results)) {
+        results = [results];
     }
-    console.log(columnify(data, {
-        showHeaders: false,
-        columnSplitter: '  '
-    }));
+
+    results.forEach(data => {
+        if (data.heading) {
+            console.log(data.heading);
+            data = data.data;
+        }
+
+        console.log(columnify(data, columnOptions));
+    });
 }
 
 function printError(error) {
@@ -43,10 +52,13 @@ function getById(id) {
 
 function getByName(name) {
     return api.byStopName(name).then(stops => {
-        return stops
+        if (stops.length  <= 2)
+            return Promise.all(stops.map(stop => getById(stop.locationId)));
+
+        return [stops
             .map(stop => {
                 return { name: stop.name, id: stop.locationId };
-            });
+            })];
     });
 }
 
