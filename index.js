@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const columnify = require('columnify');
-const api = require('./src/api');
+const api = require('./api');
 
 function print(data) {
     if (data.heading) {
