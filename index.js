@@ -35,19 +35,26 @@ function isId(query) {
     return isNumeric(query[0]);
 }
 
-function get(query) {
-    if (isId(query)) {
-        return api.byStopId(query).then(stop => {
-            return {heading: stop.name, data: formatRoutes(stop.next)};
-        });
-    }
+function getById(id) {
+    return api.byStopId(id).then(stop => {
+        return { heading: stop.name, data: formatRoutes(stop.next) };
+    });
+}
 
-    return api.byStopName(query).then(stops => {
+function getByName(name) {
+    return api.byStopName(name).then(stops => {
         return stops
             .map(stop => {
-                return {name: stop.name, id: stop.locationId};
+                return { name: stop.name, id: stop.locationId };
             });
     });
+}
+
+function get(query) {
+    if (isId(query))
+        return getById(query);
+
+    return getByName(query);
 }
 
 if (process.argv.length > 2) {
