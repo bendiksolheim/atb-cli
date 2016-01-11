@@ -14,6 +14,11 @@ function print(data) {
     }));
 }
 
+function printError(error) {
+    console.error(`Error from API: ${error}`);
+    process.exit(1);
+}
+
 function formatRoutes(routes) {
     return routes
         .map((route) => {
@@ -47,5 +52,5 @@ function get(query) {
 
 if (process.argv.length > 2) {
     const query = process.argv.slice(2).join(" ");
-    get(query).then(print);
+    get(query).then(print).catch(printError);
 }
