@@ -14,11 +14,19 @@ function containsName(name) {
     };
 }
 
+function containsError(response) {
+    return typeof response === 'object'
+        && typeof response.error === 'string';
+}
+
 function get(url, transform) {
     return new Promise((resolve, reject) => {
         request(req(url), (error, response, body) => {
             if (error)
                 return reject(error);
+
+            if (containsError(body))
+                return reject(body.error);
 
             resolve(transform(body));
         });
