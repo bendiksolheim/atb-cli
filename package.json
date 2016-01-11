@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/bendiksolheim/atb-cli#readme",
   "dependencies": {
+    "columnify": "^1.5.4",
     "request": "^2.67.0"
   },
   "preferGlobal": true,
