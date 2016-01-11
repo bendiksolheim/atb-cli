@@ -1,12 +1,7 @@
 #!/usr/bin/env node
 
+const columnify = require('columnify');
 const api = require('./src/api');
-
-function isRoute(route) {
-    return slot => {
-        return slot.l === route;
-    }
-}
 
 function formatRoutes(routes) {
     return routes
