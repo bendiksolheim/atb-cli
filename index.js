@@ -31,7 +31,7 @@ function printError(error) {
 function formatRoutes(routes) {
     return routes
         .map((route) => {
-            return {route: route.l, time: route.ts};
+            return {route: route.l, destination: route.d,  time: route.ts};
         });
 }
 
