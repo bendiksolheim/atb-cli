@@ -19,7 +19,7 @@ function print(results) {
             data = data.data;
         }
 
-        console.log(columnify(data, columnOptions));
+        console.log(`${columnify(data, columnOptions)}\n`);
     });
 }
 
